@@ -1,4 +1,4 @@
-subgen_version = '2026.07.2'
+subgen_version = '2026.07.3'
 
 """
 ENVIRONMENT VARIABLES DOCUMENTATION

@@ -60,7 +60,7 @@ import xml.etree.ElementTree as ET
 from contextlib import asynccontextmanager
 from datetime import datetime
 from threading import Event, Lock, Timer
-from typing import List, Union
+from typing import Union
 
 import av
 import faster_whisper
@@ -2181,7 +2181,7 @@ def has_external_subtitle_in_language(video_file: str, target_language: Language
 
     return False
 
-def is_valid_subtitle_language(subtitle_parts: List[str], target_language: LanguageCode) -> bool:
+def is_valid_subtitle_language(subtitle_parts: list[str], target_language: LanguageCode) -> bool:
     """Checks if any part of the subtitle name matches the target language."""
     return any(LanguageCode.from_string(part) == target_language for part in subtitle_parts)
 

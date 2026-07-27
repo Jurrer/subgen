@@ -115,8 +115,8 @@ jellyfinserver = get_env_with_fallback('JELLYFIN_SERVER', 'JELLYFINSERVER', 'htt
 
 # Whisper Configuration
 whisper_model = os.getenv('WHISPER_MODEL', 'medium')
-whisper_threads = int(os.getenv('WHISPER_THREADS', '4'))
-concurrent_transcriptions = int(os.getenv('CONCURRENT_TRANSCRIPTIONS', '2'))
+whisper_threads = int(os.getenv('WHISPER_THREADS', 4))
+concurrent_transcriptions = int(os.getenv('CONCURRENT_TRANSCRIPTIONS', 2))
 transcribe_device = os.getenv('TRANSCRIBE_DEVICE', 'cpu')
 
 # Processing Control - with backwards compatibility
@@ -128,36 +128,36 @@ subtitle_language_name = get_env_with_fallback('SUBTITLE_LANGUAGE_NAME', 'NAMESU
 
 # System Configuration - with backwards compatibility
 webhookport = get_env_with_fallback('WEBHOOK_PORT', 'WEBHOOKPORT', 9000, int)
-word_level_highlight = convert_to_bool(os.getenv('WORD_LEVEL_HIGHLIGHT', 'False'))
-debug = convert_to_bool(os.getenv('DEBUG', 'True'))
-use_path_mapping = convert_to_bool(os.getenv('USE_PATH_MAPPING', 'False'))
+word_level_highlight = convert_to_bool(os.getenv('WORD_LEVEL_HIGHLIGHT', False))
+debug = convert_to_bool(os.getenv('DEBUG', True))
+use_path_mapping = convert_to_bool(os.getenv('USE_PATH_MAPPING', False))
 path_mapping_from = os.getenv('PATH_MAPPING_FROM', r'/tv')
 path_mapping_to = os.getenv('PATH_MAPPING_TO', r'/Volumes/TV')
 model_location = os.getenv('MODEL_PATH', './models')
-monitor = convert_to_bool(os.getenv('MONITOR', 'False'))
-skip_startup_scan = convert_to_bool(os.getenv('SKIP_STARTUP_SCAN', 'False'))
+monitor = convert_to_bool(os.getenv('MONITOR', False))
+skip_startup_scan = convert_to_bool(os.getenv('SKIP_STARTUP_SCAN', False))
 transcribe_folders = os.getenv('TRANSCRIBE_FOLDERS', '')
 transcribe_or_translate = os.getenv('TRANSCRIBE_OR_TRANSLATE', 'transcribe').lower()
-clear_vram_on_complete = convert_to_bool(os.getenv('CLEAR_VRAM_ON_COMPLETE', 'True'))
+clear_vram_on_complete = convert_to_bool(os.getenv('CLEAR_VRAM_ON_COMPLETE', True))
 compute_type = os.getenv('COMPUTE_TYPE', 'auto')
-append = convert_to_bool(os.getenv('APPEND', 'False'))
-reload_script_on_change = convert_to_bool(os.getenv('RELOAD_SCRIPT_ON_CHANGE', 'False'))
-lrc_for_audio_files = convert_to_bool(os.getenv('LRC_FOR_AUDIO_FILES', 'True'))
+append = convert_to_bool(os.getenv('APPEND', False))
+reload_script_on_change = convert_to_bool(os.getenv('RELOAD_SCRIPT_ON_CHANGE', False))
+lrc_for_audio_files = convert_to_bool(os.getenv('LRC_FOR_AUDIO_FILES', True))
 custom_regroup = os.getenv('CUSTOM_REGROUP', 'cm_sl=84_sl=42++++++1')
-detect_language_length = int(os.getenv('DETECT_LANGUAGE_LENGTH', '30'))
-detect_language_offset = int(os.getenv('DETECT_LANGUAGE_OFFSET', '0'))
-model_cleanup_delay = int(os.getenv('MODEL_CLEANUP_DELAY', '30'))
-asr_timeout = int(os.getenv('ASR_TIMEOUT', '18000'))
+detect_language_length = int(os.getenv('DETECT_LANGUAGE_LENGTH', 30))
+detect_language_offset = int(os.getenv('DETECT_LANGUAGE_OFFSET', 0))
+model_cleanup_delay = int(os.getenv('MODEL_CLEANUP_DELAY', 30))
+asr_timeout = int(os.getenv('ASR_TIMEOUT', 18000))
 webhook_url_completed = os.getenv('WEBHOOK_URL_COMPLETED', '')
 
 # Skip Configuration - with backwards compatibility
 skip_if_external_sub_exists = get_env_with_fallback('SKIP_IF_EXTERNAL_SUBTITLES_EXIST', 'SKIPIFEXTERNALSUB', False, convert_to_bool)
 skip_if_target_subtitle_exists = get_env_with_fallback('SKIP_IF_TARGET_SUBTITLES_EXIST', 'SKIP_IF_TO_TRANSCRIBE_SUB_ALREADY_EXIST', True, convert_to_bool)
 skip_if_internal_sub_language = LanguageCode.from_string(get_env_with_fallback('SKIP_IF_INTERNAL_SUBTITLES_LANGUAGE', 'SKIPIFINTERNALSUBLANG', ''))
-ignore_forced_subtitles = convert_to_bool(os.getenv('IGNORE_FORCED_SUBTITLES', 'True'))
-plex_queue_next_episode = convert_to_bool(os.getenv('PLEX_QUEUE_NEXT_EPISODE', 'False'))
-plex_queue_season = convert_to_bool(os.getenv('PLEX_QUEUE_SEASON', 'False'))
-plex_queue_series = convert_to_bool(os.getenv('PLEX_QUEUE_SERIES', 'False'))
+ignore_forced_subtitles = convert_to_bool(os.getenv('IGNORE_FORCED_SUBTITLES', True))
+plex_queue_next_episode = convert_to_bool(os.getenv('PLEX_QUEUE_NEXT_EPISODE', False))
+plex_queue_season = convert_to_bool(os.getenv('PLEX_QUEUE_SEASON', False))
+plex_queue_series = convert_to_bool(os.getenv('PLEX_QUEUE_SERIES', False))
 # Language and Skip Configuration - with backwards compatibility
 skip_subtitle_languages = ([LanguageCode.from_string(code) for code in get_env_with_fallback('SKIP_SUBTITLE_LANGUAGES', 'SKIP_LANG_CODES', '').split("|")]
         if get_env_with_fallback('SKIP_SUBTITLE_LANGUAGES', 'SKIP_LANG_CODES')
@@ -168,7 +168,7 @@ preferred_audio_languages =[
     LanguageCode.from_string(code) 
     for code in os.getenv('PREFERRED_AUDIO_LANGUAGES', 'eng').split("|")
 ] # in order of preference
-limit_to_preferred_audio_languages = convert_to_bool(os.getenv('LIMIT_TO_PREFERRED_AUDIO_LANGUAGE', 'False'))
+limit_to_preferred_audio_languages = convert_to_bool(os.getenv('LIMIT_TO_PREFERRED_AUDIO_LANGUAGE', False))
 skip_audio_languages = ([LanguageCode.from_string(code) for code in get_env_with_fallback('SKIP_IF_AUDIO_LANGUAGES', 'SKIP_IF_AUDIO_TRACK_IS', '').split("|")]
     if get_env_with_fallback('SKIP_IF_AUDIO_LANGUAGES', 'SKIP_IF_AUDIO_TRACK_IS')
     else[]
@@ -177,12 +177,12 @@ skip_audio_languages = ([LanguageCode.from_string(code) for code in get_env_with
 # Additional Subtitle Configuration - with backwards compatibility
 subtitle_language_naming_type = os.getenv('SUBTITLE_LANGUAGE_NAMING_TYPE', 'ISO_639_2_B')
 only_match_subgen_subtitles = get_env_with_fallback('SKIP_ONLY_SUBGEN_SUBTITLES', 'ONLY_SKIP_IF_SUBGEN_SUBTITLE', False, convert_to_bool)
-skip_unknown_language = convert_to_bool(os.getenv('SKIP_UNKNOWN_LANGUAGE', 'False'))
+skip_unknown_language = convert_to_bool(os.getenv('SKIP_UNKNOWN_LANGUAGE', False))
 skip_if_no_audio_language_but_subtitles_exist = get_env_with_fallback('SKIP_IF_NO_LANGUAGE_BUT_SUBTITLES_EXIST', 'SKIP_IF_LANGUAGE_IS_NOT_SET_BUT_SUBTITLES_EXIST', False, convert_to_bool)
-ignore_forced_subtitles = convert_to_bool(os.getenv('IGNORE_FORCED_SUBTITLES', 'True'))
-should_whisper_detect_audio_language = convert_to_bool(os.getenv('SHOULD_WHISPER_DETECT_AUDIO_LANGUAGE', 'False'))
-show_in_subname_subgen = convert_to_bool(os.getenv('SHOW_IN_SUBNAME_SUBGEN', 'True'))
-show_in_subname_model = convert_to_bool(os.getenv('SHOW_IN_SUBNAME_MODEL', 'True'))
+ignore_forced_subtitles = convert_to_bool(os.getenv('IGNORE_FORCED_SUBTITLES', True))
+should_whisper_detect_audio_language = convert_to_bool(os.getenv('SHOULD_WHISPER_DETECT_AUDIO_LANGUAGE', False))
+show_in_subname_subgen = convert_to_bool(os.getenv('SHOW_IN_SUBNAME_SUBGEN', True))
+show_in_subname_model = convert_to_bool(os.getenv('SHOW_IN_SUBNAME_MODEL', True))
 
 # Advanced Configuration
 try:

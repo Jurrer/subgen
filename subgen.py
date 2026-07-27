@@ -60,7 +60,7 @@ import xml.etree.ElementTree as ET
 from contextlib import asynccontextmanager
 from datetime import datetime
 from threading import Event, Lock, Timer
-from typing import List, Union
+from typing import Union
 
 import av
 import faster_whisper
@@ -115,8 +115,8 @@ jellyfinserver = get_env_with_fallback('JELLYFIN_SERVER', 'JELLYFINSERVER', 'htt
 
 # Whisper Configuration
 whisper_model = os.getenv('WHISPER_MODEL', 'medium')
-whisper_threads = int(os.getenv('WHISPER_THREADS', 4))
-concurrent_transcriptions = int(os.getenv('CONCURRENT_TRANSCRIPTIONS', 2))
+whisper_threads = int(os.getenv('WHISPER_THREADS', '4'))
+concurrent_transcriptions = int(os.getenv('CONCURRENT_TRANSCRIPTIONS', '2'))
 transcribe_device = os.getenv('TRANSCRIBE_DEVICE', 'cpu')
 
 # Processing Control - with backwards compatibility
@@ -128,7 +128,7 @@ subtitle_language_name = get_env_with_fallback('SUBTITLE_LANGUAGE_NAME', 'NAMESU
 
 # System Configuration - with backwards compatibility
 webhookport = get_env_with_fallback('WEBHOOK_PORT', 'WEBHOOKPORT', 9000, int)
-word_level_highlight = convert_to_bool(os.getenv('WORD_LEVEL_HIGHLIGHT', False))
+word_level_highlight = convert_to_bool(os.getenv('WORD_LEVEL_HIGHLIGHT', 'False'))
 debug = convert_to_bool(os.getenv('DEBUG', True))
 use_path_mapping = convert_to_bool(os.getenv('USE_PATH_MAPPING', False))
 path_mapping_from = os.getenv('PATH_MAPPING_FROM', r'/tv')
@@ -2181,7 +2181,7 @@ def has_external_subtitle_in_language(video_file: str, target_language: Language
 
     return False
 
-def is_valid_subtitle_language(subtitle_parts: List[str], target_language: LanguageCode) -> bool:
+def is_valid_subtitle_language(subtitle_parts: list[str], target_language: LanguageCode) -> bool:
     """Checks if any part of the subtitle name matches the target language."""
     return any(LanguageCode.from_string(part) == target_language for part in subtitle_parts)
 

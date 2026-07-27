@@ -276,6 +276,8 @@ touch "/tv/Some Show/Season 1/.subgen_skip"  # skips just that season
 | `SKIP_IF_NO_LANGUAGE_BUT_SUBTITLES_EXIST`| `False` | Skips generation if file doesn't have an audio stream marked with a language, but subtitles exist. |
 | `IGNORE_FORCED_SUBTITLES` | `True` | When `True`, forced embedded subtitle tracks are excluded from all skip-coverage checks. A file whose only matching subtitle tracks are forced will be treated as having no coverage and transcribed normally. Set to `False` to count forced tracks as full coverage (old behaviour). |
 
+> **Not sure why a file is being skipped?** Use the [Skip Logic Calculator](https://htmlpreview.github.io/?https://github.com/McCloudS/subgen/blob/main/docs/skip-logic-calculator.html) — configure your settings, describe what subtitle files and streams exist, and it shows exactly what triggered the skip.
+
 ### 📝 Subtitle Formatting & Preferences
 | Variable | Default | Description |
 |---|---|---|

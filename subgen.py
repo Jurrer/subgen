@@ -1647,6 +1647,11 @@ def define_subtitle_language_naming(language: LanguageCode, type):
     if subtitle_language_name:
         return subtitle_language_name
     # If we are translating, then we ALWAYS output an english file.
+    # This MUST come before switch_dict is built: its values are bound methods,
+    # captured against whatever `language` refers to at construction time. Rebinding
+    # `language` afterwards would leave them pointing at the original language.
+    if transcribe_or_translate == 'translate':
+        language = LanguageCode.ENGLISH
     switch_dict = {
         "ISO_639_1": language.to_iso_639_1,
         "ISO_639_2_T": language.to_iso_639_2_t,
@@ -1654,8 +1659,6 @@ def define_subtitle_language_naming(language: LanguageCode, type):
         "NAME": language.to_name,
         "NATIVE": lambda: language.to_name(in_english=False)
     }
-    if transcribe_or_translate == 'translate':
-        language = LanguageCode.ENGLISH
     return switch_dict.get(type, language.to_name)()
 
 def name_subtitle(file_path: str, language: LanguageCode) -> str:
